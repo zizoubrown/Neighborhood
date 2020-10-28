@@ -16,3 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('name', 'email', 'status','neighborhood')
 
+class BusinessSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Business
+        fields = ('business_name', 'user', 'business_email','neighborhood')
+
