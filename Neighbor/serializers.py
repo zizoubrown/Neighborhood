@@ -11,3 +11,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('user', 'name', 'location','neighborhood_name')
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name', 'email', 'status','neighborhood')
+
