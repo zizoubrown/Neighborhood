@@ -6,3 +6,8 @@ class NeighborhoodSerializer(serializers.ModelSerializer):
         model = Neighborhood
         fields = ('neighborhood_name', 'neighborhood_location', 'occupants_count','admin')
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('user', 'name', 'location','neighborhood_name')
+
