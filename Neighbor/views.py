@@ -34,7 +34,15 @@ class NeighborhoodDescription(APIView):
         neighborhood = self.get_hood(pk)
         serializers = NeighborhoodSerializer(neighborhood)
         return Response(serializers.data)
-
+    
+    def put(self, request, pk, format=None):
+        neighborhood = self.get_neighborhood(pk)
+        serializers = NieghborhoodSerializer(neighborhood, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ProfileList(APIView):
     def get(self, request, format=None):
@@ -62,7 +70,15 @@ class ProfileDescription(APIView):
         profile = self.get_profile(pk)
         serializers = ProfileSerializer(profile)
         return Response(serializers.data)
-
+    
+    def put(self, request, pk, format=None):
+        profile = self.get_profile(pk)
+        serializers = ProfileSerializer(profile, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserList(APIView):
     def get(self, request, format=None):
@@ -77,7 +93,7 @@ class UserList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 class UserDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get_merch(self, pk):
@@ -90,6 +106,15 @@ class UserDescription(APIView):
         user = self.get_user(pk)
         serializers = UserSerializer(user)
         return Response(serializers.data)
+    
+    def put(self, request, pk, format=None):
+        user = self.get_user(pk)
+        serializers = UserSerializer(user, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class BusinessList(APIView):
@@ -108,7 +133,7 @@ class BusinessList(APIView):
 
 class BusinessDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
-    def get_merch(self, pk):
+    def get_business(self, pk):
         try:
             return Business.objects.get(pk=pk)
         except Business.DoesNotExist:
@@ -118,3 +143,12 @@ class BusinessDescription(APIView):
         business = self.get_business(pk)
         serializers = BusinessSerializer(business)
         return Response(serializers.data)
+    
+    def put(self, request, pk, format=None):
+        business = self.get_user(pk)
+        serializers = BusinessSerializer(business, request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
