@@ -51,3 +51,10 @@ class BusinessList(APIView):
         all_business = Business.objects.all()
         serializers = BusinessSerializer(all_business, many=True)
         return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = BusinessSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
