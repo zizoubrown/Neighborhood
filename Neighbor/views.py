@@ -31,7 +31,7 @@ class NeighborhoodDescription(APIView):
             return Http404
 
     def get(self, request, pk, format=None):
-        neighborhood = self.get_hood(pk)
+        neighborhood = self.get_neighborhood(pk)
         serializers = NeighborhoodSerializer(neighborhood)
         return Response(serializers.data)
     
@@ -43,6 +43,12 @@ class NeighborhoodDescription(APIView):
             return Response(serializers.data)
         else:
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+   def delete(self, request, pk, format=None):
+        neighborhood = self.get_neighborhood(pk)
+        neighborhood.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ProfileList(APIView):
     def get(self, request, format=None):
@@ -79,6 +85,12 @@ class ProfileDescription(APIView):
             return Response(serializers.data)
         else:
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+   def delete(self, request, pk, format=None):
+        profile = self.get_profile(pk)
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class UserList(APIView):
     def get(self, request, format=None):
@@ -96,7 +108,7 @@ class UserList(APIView):
     
 class UserDescription(APIView):
     permission_classes = (IsAdminOrReadOnly,)
-    def get_merch(self, pk):
+    def get_user(self, pk):
         try:
             return User.objects.get(pk=pk)
         except User.DoesNotExist:
@@ -115,7 +127,12 @@ class UserDescription(APIView):
             return Response(serializers.data)
         else:
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 
+   def delete(self, request, pk, format=None):
+        user = self.get_user(pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class BusinessList(APIView):
     def get(self, request, format=None):
@@ -145,10 +162,16 @@ class BusinessDescription(APIView):
         return Response(serializers.data)
     
     def put(self, request, pk, format=None):
-        business = self.get_user(pk)
+        business = self.get_business(pk)
         serializers = BusinessSerializer(business, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
         else:
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+   def delete(self, request, pk, format=None):
+        business = self.get_business(pk)
+        business.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
