@@ -16,3 +16,9 @@ class ProfileList(APIView):
         all_profile = Profile.objects.all()
         serializers = ProfileSerializer(all_profile, many=True)
         return Response(serializers.data)
+
+class UserList(APIView):
+    def get(self, request, format=None):
+        all_user = User.objects.all()
+        serializers = UserSerializer(all_user, many=True)
+        return Response(serializers.data)
