@@ -16,6 +16,7 @@ class NeighborhoodList(APIView):
 
     def post(self, request, format=None):
         serializers = NeighborhoodSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -29,6 +30,7 @@ class ProfileList(APIView):
 
     def post(self, request, format=None):
         serializers = ProfileSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -42,6 +44,7 @@ class UserList(APIView):
 
     def post(self, request, format=None):
         serializers = UserSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -55,6 +58,7 @@ class BusinessList(APIView):
 
     def post(self, request, format=None):
         serializers = BusinessSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
