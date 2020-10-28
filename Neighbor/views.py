@@ -22,3 +22,9 @@ class UserList(APIView):
         all_user = User.objects.all()
         serializers = UserSerializer(all_user, many=True)
         return Response(serializers.data)
+
+class BusinessList(APIView):
+    def get(self, request, format=None):
+        all_business = Business.objects.all()
+        serializers = BusinessSerializer(all_business, many=True)
+        return Response(serializers.data)
