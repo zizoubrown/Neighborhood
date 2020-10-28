@@ -7,5 +7,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
-    path('api/post/auth/signup', views.MerchList.as_view())
+    path('api/post/auth/signup', views.MerchList.as_view()),
+     path('api/neighborhood/', views.NeighborhoodList.as_view()),
 ]
