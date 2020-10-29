@@ -4,20 +4,20 @@ from .models import *
 class NeighborhoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Neighborhood
-        fields = ('neighborhood_name', 'neighborhood_location', 'occupants_count','admin')
+        fields = ('id','neighborhood_name', 'neighborhood_location', 'occupants_count','admin')
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user', 'name', 'location','neighborhood_name')
+        fields = ('id','user', 'name', 'location','neighborhood_name')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'email', 'status','neighborhood')
+        fields = ('id','name', 'email', 'status','neighborhood')
 
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Business
-        fields = ('business_name', 'user', 'business_email','neighborhood')
+        fields = ('id','business_name', 'user', 'business_email','neighborhood')
 
