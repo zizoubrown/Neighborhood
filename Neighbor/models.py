@@ -7,10 +7,11 @@ class Neighborhood(models.Model):
     neighborhood_name = models.CharField(max_length=50, null=True, blank=True)
     neighborhood_location = models.CharField(max_length=50, null=True, blank=True)
     occupants_count = models.IntegerField(default=0)
-    admin = models.ForeignKey(admin, on_delete=models.CASCADE, related_name="neighborhood")
-
+    
+    
     def __str__(self):
-		return self.name
+        return self.neighborhood_name
+    
 
     def create_neighborhood(self):
         self.save()
@@ -24,10 +25,10 @@ class Profile(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True)
     neighborhood_name = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='neighborhood')
-
+    
     def __str__(self):
-		return self.user.username
-
+        return self.user
+    
     def create_profile(self):
         self.save()
 

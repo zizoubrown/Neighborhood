@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
-from .serializer import *
+from .serializers import NeighborhoodSerializer, ProfileSerializer, UserSerializer, BusinessSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 
@@ -46,7 +46,7 @@ class NeighborhoodDescription(APIView):
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-   def delete(self, request, pk, format=None):
+    def delete(self, request, pk, format=None):
         neighborhood = self.get_neighborhood(pk)
         neighborhood.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -88,7 +88,7 @@ class ProfileDescription(APIView):
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
-   def delete(self, request, pk, format=None):
+    def delete(self, request, pk, format=None):
         profile = self.get_profile(pk)
         profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -130,7 +130,7 @@ class UserDescription(APIView):
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-   def delete(self, request, pk, format=None):
+    def delete(self, request, pk, format=None):
         user = self.get_user(pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -172,7 +172,7 @@ class BusinessDescription(APIView):
             return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-   def delete(self, request, pk, format=None):
+    def delete(self, request, pk, format=None):
         business = self.get_business(pk)
         business.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

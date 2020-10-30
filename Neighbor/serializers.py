@@ -4,7 +4,7 @@ from .models import *
 class NeighborhoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Neighborhood
-        fields = ('id','neighborhood_name', 'neighborhood_location', 'occupants_count','admin')
+        fields = ('id','neighborhood_name', 'neighborhood_location', 'occupants_count')
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
